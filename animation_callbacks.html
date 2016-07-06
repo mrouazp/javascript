@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Callbacks</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            div, p {
+                width: 100px;
+                height: 100px;
+                background-color: red;
+                position: relative;
+                left: 0;
+            }
+            div {
+                transition: left 1s cubic-bezier(.71,-2,.69,3);
+            }
+        </style>
+    </head>
+    <body>
+        <div></div>
+        <p></p>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            $('div').click(function() {
+                $(this).css('left', 400);
+            });
+            $('div').on("transitionend", completed);
+            
+            $('p').animate({
+                left: "+=400"
+            },
+            {
+                duration: 2000,
+                complete: completed
+            });
+            
+            function completed() {
+                alert("Animation completed");
+            }
+        </script>
+    </body>
+</html>

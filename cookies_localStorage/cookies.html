@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cookies</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form>
+            <label>Name:</label>
+            <input type="text" name="name">
+            <label>Email:</label>
+            <input type="email" name="email">
+            <input type="submit" value="Send data">
+        </form>
+        <a href="cookies2.html">To get cookie page</a>
+        <script>
+            document.querySelector("form").onsubmit = function(e) {
+                e.preventDefault();
+                var formData = {};
+                setCookie(this.elements.name.name, this.elements.name.value, 1);
+                formData[this.elements.name.name] = this.elements.name.value;
+                setCookie(this.elements.email.name, this.elements.email.value, 1);
+                formData[this.elements.email.name] = this.elements.email.value;
+                localStorage.setItem('myform', JSON.stringify(formData));
+            };
+            
+            function setCookie(cname, cvalue, expires) {
+                var date = new Date();
+                date.setDate(date.getDate() + expires);
+                var str = cname + "=" + cvalue + "; expires=" + date.toUTCString() + ";";
+                document.cookie = str;
+            }
+        </script>
+    </body>
+</html>

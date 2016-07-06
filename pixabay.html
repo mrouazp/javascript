@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pixabay</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            hr {
+                margin: 10px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <label>Тема <br>(вводить на русском, можно несколько слов):</label>
+        <input type="text" name="words">
+        <hr>
+        <button id="photos">Get photos</button>
+        <button id="videos">Get videos</button>
+        <hr>
+        <div id='result'></div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            var api = "https://pixabay.com/api";
+            //ваш ключ при регистрации
+            var key = '';
+            $('#photos').click(function () {
+                //слова в строке поиска должны быть закодированы как url - encodeURIComponent
+                var words = $('input[name="words"]').val();
+                $.ajax({
+                    method: "GET",
+                    url: api + "?key=" + key + "&per_page=3&lang=ru&q=" + encodeURIComponent(words)
+                }).done(function(msg) {
+                    console.log(msg);
+                    $('#result').empty();
+                    for(var i=0; i < msg.hits.length; i++)
+                        $('#result').append('<div><img src="' + 
+                            msg.hits[i].webformatURL + '" alt="pixabay image"></div>');
+                });
+            });
+            
+            $('#videos').click(function () {
+                var words = $('input[name="words"]').val();
+                $.ajax({
+                    method: "GET",
+                    url: api + "/videos?key=" + key + "&per_page=3&lang=ru&q=" + encodeURIComponent(words)
+                }).done(function(msg) {
+                    console.log(msg);
+                    $('#result').empty();
+                    for(var i=0; i < msg.hits.length; i++)
+                        $('#result').append('<div><video src="' +
+                            msg.hits[i].videos.small.url + '" controls></div>');
+                });
+            });
+        </script>    
+    </body>
+</html>

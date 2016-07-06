@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cookies2</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <label>Get cookie:</label>
+            <input type="text" name="getCookie">
+            <button>Get cookie</button>
+        </div>
+        <div>
+            <label>Check cookie:</label>
+            <input type="text" name="checkCookie">
+            <button>Check cookie</button>
+        </div>
+        <div>
+            <label>Delete cookie:</label>
+            <input type="text" name="deleteCookie">
+            <button>Delete cookie</button>
+        </div>
+        <div>
+            <label>All cookies:</label>
+            <button id="show_all">Show all cookies</button>
+        </div>
+        <a href="cookies.html">Back to set cookie page</a>
+        <script>
+            console.log(JSON.parse(localStorage.getItem('myform')));
+            
+            document.querySelector('input[name="getCookie"] + button').onclick = function() {
+                var cvalue = getCookie(this.previousElementSibling.value);
+                alert((cvalue !== false)? cvalue : "" );
+            };
+            
+            document.querySelector('input[name="checkCookie"] + button').onclick = function() {
+                checkCookie(this.previousElementSibling.value);
+            };
+            
+            document.querySelector('input[name="deleteCookie"] + button').onclick = function() {
+                deleteCookie(this.previousElementSibling.value);
+            };
+            
+            document.getElementById('show_all').onclick = function() {
+                alert(document.cookie);
+            };
+            
+            function setCookie(cname, cvalue, expires) {
+                var date = new Date();
+                date.setDate(date.getDate() + expires);
+                var str = cname + "=" + cvalue + "; expires=" + date.toUTCString() + ";";
+                document.cookie = str;
+            }
+            
+            function getCookie(cname) {
+                cname += "=";
+                var cookies = document.cookie;
+                var cookiesArr = cookies.split(";");
+                for (var i = 0; i < cookiesArr.length; i++) {
+                    var cookie = cookiesArr[i].trim();
+                    if (cookie.indexOf(cname) === 0)
+                        return cookie.substring(cname.length);
+                }
+                return false;
+            }
+            
+            function checkCookie(cname) {
+                var cookieValue = getCookie(cname);
+                if (cookieValue === false)
+                    alert("Cookie \"" + cname + "\" is not exists");
+                else
+                    alert("Cookie \"" + cname + "\" exists");
+            }
+            
+            function deleteCookie(cname) {
+                setCookie(cname, "", -1);
+            }
+        </script>
+    </body>
+</html>

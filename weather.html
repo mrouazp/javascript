@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Weather</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <input type='text' name='city'>
+        <button>Get weather</button>
+        <div id='result'></div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            var api = "http://api.openweathermap.org/data/2.5/forecast/city";
+            //ваш id при регистрации
+            var appId = "";
+            $('button').click(function () {
+                $.ajax({
+                    method: "GET",
+                    url: api + "?APPID=" + appId + "&q=" + $('input[name="city"]').val() + "&units=metric&lang=ru"
+                }).done(function(msg) {
+                    console.log(msg);
+                    $('#result').empty();
+                    if (msg.cod !== '200')
+                        $('#result').html(msg.cod + " " + msg.message);
+                    else {
+                        var str = "Город: " + msg.city.name + " страна: " + 
+                                msg.city.country + " координаты: [" +
+                                msg.city.coord.lat + ", " + msg.city.coord.lon + "]";
+                        str += " время: " + msg.list[0].dt_txt + " температура: " + msg.list[0].main.temp;
+                        $('#result').html(str);
+                    }
+                });
+            });
+        </script> 
+    </body>
+</html>
