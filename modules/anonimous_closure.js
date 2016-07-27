@@ -1,6 +1,5 @@
-var arr = [-1, 43, 14, 2, 5];
-
-(function (arr) {
+(function () {
+    var arr = [-1, 43, 14, 2, 5];
 
     function negative() {
         var count = 0;
@@ -32,4 +31,4 @@ var arr = [-1, 43, 14, 2, 5];
     console.log(even());
     console.log(average());
 
-}(arr));
+}());
