@@ -1,0 +1,22 @@
+@size: 12px;
+
+.todo p {
+    position: relative;
+    display: inline-block;
+    background-color: lightgreen;
+    margin: 10px 20px;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    
+    .delete {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: @size;
+        height: @size;
+        font-size: @size;
+        color: red;
+        cursor: pointer;
+    }
+}

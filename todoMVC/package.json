@@ -16,6 +16,14 @@
   "author": "me",
   "license": "BSD-2-Clause",
   "devDependencies": {
-    "node-static": "~0.7.8"
+    "node-static": "~0.7.8",
+    "gulp": "~3.9.1",
+    "gulp-concat": "~2.6.0",
+    "gulp-uglify": "~1.5.4",
+    "gulp-watch": "~4.3.9",
+    "gulp-notify": "~2.2.0",
+    "gulp-cssmin": "~0.1.7",
+    "gulp-less": "~3.1.0",
+    "gulp-sourcemaps": "~1.6.0"
   }
 }
