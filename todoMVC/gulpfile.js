@@ -17,11 +17,13 @@ gulp.task('minify_js', function() {
 
 gulp.task('minify_css', function() {
         return gulp.src('css/src/*.less')
-            .pipe(sourcemap.init())
+            //Нужно для получения sourcemaps
+            //.pipe(sourcemap.init())
             .pipe(less())
-            .pipe(sourcemap.write())
+            //Нужно для получения sourcemaps
+            //.pipe(sourcemap.write())
             .pipe(concat('style.css'))
-            //.pipe(minify())
+            .pipe(minify())
             .pipe(gulp.dest('css/prod'))
             .pipe(notify('Minify css is completed'));
 });
